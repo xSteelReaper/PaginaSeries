@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Recomienda Series{% endblock title %}
+
+{% block carousel %}
+<div class="row">
+        <div class="col s12">
+            <h1 class="center-align titulo">
+                ¿Te gusta el Anime y Manga? Aquí tienes recomendaciones ♥
+            </h1>
+            <div class="carousel center-align">
+                <div class="carousel-item">
+                    <h2 class="subtitulo">
+                        Black Clover
+                    </h2>
+                    <div class="linea-division">
+                    </div>
+                    <p class="creador">
+                        Yuuki Tabata
+                    </p>
+                    <img src="{% static 'images/Portadas_Manga/Black_Clover.png' %}" alt="">
+                </div>
+
+                <div class="carousel-item">
+                    <h2 class="subtitulo">
+                        One Piece
+                    </h2>
+                    <div class="linea-division">
+                    </div>
+                    <p class="creador">
+                        Eichiro Oda
+                    </p>
+                    <img src="{% static 'images/Portadas_Manga/One_Piece.png' %}" alt="">
+                </div>
+
+                <div class="carousel-item">
+                    <h2 class="subtitulo">
+                        Tate No Yuusha
+                    </h2>
+                    <div class="linea-division">
+                    </div>
+                    <p class="creador">
+                        Aneko Yusagi
+                    </p>
+                    <img src="{% static 'images/Portadas_Manga/Tate_no_Yuusha_no_Nariagari.png' %}" alt="">
+                </div>
+
+                <div class="carousel-item">
+                    <h2 class="subtitulo">
+                        Kanojo Okarishimasu
+                    </h2>
+                    <div class="linea-division">
+                    </div>
+                    <p class="creador">
+                        Reiji Miyajima
+                    </p>
+                    <img src="{% static 'images/Portadas_Manga/Kanojo_Okarishimasu.png' %}" alt="">
+                </div>
+
+                <div class="carousel-item">
+                    <h2 class="subtitulo">
+                        Kaguya Sama
+                    </h2>
+                    <div class="linea-division">
+                    </div>
+                    <p class="creador">
+                        Aka Akasaka
+                    </p>
+                    <img src="{% static 'images/Portadas_Manga/Kaguya_Sama.png' %}" alt="">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+{% endblock carousel %}
+
+{% block animes %}
+<section id="animes">
+
+        <h2 class="center-align titulo">
+            <br>
+            <br> Animes ♥
+        </h2>
+
+        <div class="contenedor">
+            {% for anime in object_list %}
+            <div class="contenedor_tarjeta">
+                <a href="#">                    
+                    <figure>
+                        <img src= ../static/images/{{ anime.fotografia }} class="frontal" alt="catalogo_anime">
+                        <figcaption class="trasera">
+                            <h2 class="titulo"> {{ anime.nombre  }}</h2>
+                            <hr>
+                            <p> {{ anime.sinopsis }} </p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock animes %}
+
+{% block mangas %}
+<section id="mangas">
+
+        <h2 class="center-align titulo">
+            <br>
+            <br> Mangas ♥
+        </h2>
+        <div class="contenedor">
+            {% for manga in object_list %}
+            <div class="contenedor_tarjeta">
+                <a href="#">                    
+                    <figure>
+                        <img src= ../static/images/{{ manga.fotografia }} class="frontal" alt="catalogo_manga">
+                        <figcaption class="trasera">
+                            <h2 class="titulo"> {{ manga.nombre  }}</h2>
+                            <hr>
+                            <p> {{ manga.sinopsis }} </p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock mangas %}

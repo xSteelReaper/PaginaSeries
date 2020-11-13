@@ -20,6 +20,7 @@ from django.contrib.auth import views as auth_views
 
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('registro/', include('apps.Registro.urls')),
@@ -31,3 +32,6 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
 
 ]
+
+
+
