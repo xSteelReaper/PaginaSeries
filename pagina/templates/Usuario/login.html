@@ -1,0 +1,46 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}" type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<div id="login" class="form-box animated fadeInUp">
+    <h1 class="form-title">Login</h1><br>
+    <form method="POST" id="formulario">
+        {% csrf_token %}
+
+        <div class="form-box">
+            <input type="text" placeholder="Username" autofocus>
+            <div class="bg-danger mt-1">{{ form.errors.username }}</div>
+        </div>
+
+        <div class="form-box">
+            <input type="password" placeholder="Password">
+            <div class="bg-danger mt-1">{{ form.errors.password }}</div>
+        </div>
+
+        {% if form.non_field_errors %}
+        <div class="form-box">
+            <div class="bg-danger mt-1 p-2">Login incorrecto!</div>
+        </div>  
+        {% endif %}
+        
+        {{form.non_field_errors}}
+
+        <div class="form-box">
+            <input class="btn" type="submit" value="Enviar"/>
+        </div>
+        
+    </form>
+</div>
+{% endblock %}

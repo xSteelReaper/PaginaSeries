@@ -1,0 +1,38 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block title %}
+Registro Usuario
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="css/formulario.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<form id="basic-form" action="" method="post">
+        <section class="form-register" id="basic-form">
+            <h4>Registrate</h4>
+            <input class="controls" type="text" name="nick" id="nick" placeholder="Ingrese nickname" autofocus>
+            <input class="controls" type="email" name="correo" id="correo" placeholder="Ingrese su Correo">
+            <input class="controls" type="password" name="contraseña" id="contraseña" placeholder="Ingrese su contraseña">
+            <input class="controls" type="password" name="contraseñar" id="contraseñar" placeholder="Ingresela denuevo">
+            <p>Estoy de acuerdo con <a href="#">Terminos y condiciones</a></p>
+            <input class="boton" type="submit" value="Registrar">
+            <p><a href=" {% url 'home' %} ">¿Ya tienes cuenta?</a></p>
+        </section>
+    </form>
+
+{% block javascript %} 
+    <script src="/js/main.js"></script> 
+{% endblock javascript %}
+
+
+
+{% endblock %}
+
