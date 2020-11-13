@@ -7,7 +7,6 @@ class RegistroForm(UserCreationForm):
         model = User
         fields = [
                 'username',
-                
                 'email',
             ]
         labels = {

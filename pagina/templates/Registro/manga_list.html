@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+<h1 class="display-3">Mangas</h1>
+<hr>
+<a class="btn" role="button" href="{% url 'anime_form' %}">Agregar</a>
+<hr>
+
+{% if not object_list %}
+<h1>No hay registro de Mangas</h1>
+<br><br><br><br><br><br><br><br>
+{% else %}
+<table class="table table-bordered">
+    <thead>
+         <tr> 
+             <td>Nombre</td>
+             <td>Publicacion</td>
+             <td>Estado</td>
+             <td>Sinopsis</td>
+             <td>Fotografia</td>
+         </tr>
+    </thead>
+    <tbody>  
+         {% for manga in object_list %}      
+         <tr>
+             <td><img src= ../../static/images/{{ manga.fotografia }} style="width: 100px;"/> </td>
+             <td>{{ manga.nombre }}</td>
+             <td>{{ manga.anioPublicacion }}</td>
+             <td>{{ manga.estado }}</td>
+             <td>{{ manga.sinopsis }}</td>
+             <td>
+                 <a class="btn btn-primary" href="{% url 'manga_update' manga.id%}">  Editar  </a>
+                 <a class="btn btn-danger" href="{% url 'manga_borrar' manga.id%}">Eliminar</a>
+             </td>
+             
+         </tr>
+         {% endfor %}                                
+    </tbody>
+</table>
+{% endif %}
+
+</div>
+
+{% endblock %}

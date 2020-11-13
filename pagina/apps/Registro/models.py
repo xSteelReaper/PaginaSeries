@@ -9,7 +9,7 @@ TIPO = (
 
 class Anime(models.Model):
     nombre = models.CharField(max_length=100)
-    anioPublicacion = models.IntegerField()
+    anioPublicacion = models.CharField(max_length=50)
     tipo = models.CharField(max_length=50, choices=TIPO)
     sinopsis = models.CharField(max_length=1000)
     fotografia = models.ImageField(upload_to='catalogo_anime', blank=True)
@@ -24,7 +24,7 @@ ESTADO = (
 
 class Manga(models.Model):
     nombre = models.CharField(max_length=100)
-    anioPublicacion = models.IntegerField()
+    anioPublicacion = models.CharField(max_length=50)
     estado = models.CharField(max_length=50, choices=ESTADO)
     sinopsis = models.CharField(max_length=1000)
     fotografia = models.ImageField(upload_to='catalogo_manga', blank=True)
