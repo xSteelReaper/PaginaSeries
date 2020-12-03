@@ -1,0 +1,323 @@
+
+{% load static %}
+
+{% load pwa %}
+{% progressive_web_app_meta %}
+
+{% block head %}
+
+
+
+        
+        
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Dancing+Script%7CRaleway:500,600&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/0dac381c07.js"></script>
+
+        <!-- Materialize -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="{% static '/css/index.css' %}">
+        <link rel="stylesheet" href="{% static '/css/estilos.css' %}">
+        <link rel="stylesheet" href="{% static '/css/font.css' %}">
+        <link rel="stylesheet" href="{% static '/css/footer.css' %}">
+        <link rel="stylesheet" href="{% static '/css/redes_sociales.css' %}">
+        <link rel="stylesheet" href="{% static '/css/catalogo_anime.css' %}">
+        <link rel="stylesheet" href="{% static '/css/catalogo_manga.css' %}">
+        {% comment %} <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}"> {% endcomment %}
+
+        <!--JavaScript-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+{% endblock  %}
+
+<nav class="nav-wrapper sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}"><img src=" {% static 'images/Logo/Fairy_tale_symbol.svg' %}" class="logo" alt="logo"></a>
+            <a href="#" data-target="menu-responsive" class="sidenav-trigger">
+                <i class="material-icons">menu</i>
+            </a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="{% url 'home' %}">Inicio</a></li>
+                <li><a href="{% url 'animecatalogo' %}">Anime</a></li>
+                <li><a href="{% url 'mangacatalogo' %}">Manga</a></li>
+                
+                {% if not user.is_authenticated %}  
+                <a class="btn btn-primary" href="{% url 'registrar' %} " role="button">Registro</a>
+                <a class="btn btn-primary" href="{% url 'login' %}" role="button">Login</a>
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                {% if user.is_superuser %}
+                <li class="nav-item"><a style="color: white;" href="{% url 'anime_list' %}">Listar Anime</a></li>
+                <li class="nav-item"><a style="color: white;" href="{% url 'manga_list' %}">Listar Manga</a></li>
+                {% endif %}
+               
+                <li class="nav-item"><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+                <span class="ml-md-5" style="color: blue;"><strong>Usuario: {{ user.get_username }}</strong></span>
+                {% endif %}  
+                
+            </ul>
+        </div>
+    </nav>
+
+    <!--Haciendo el nav responsive-->
+    <ul class="sidenav" id="menu-responsive">
+        <li><a href="{% url 'home' %}">Inicio</a></li>
+        <li><a href="{% url 'home' %}">Animes</a></li>
+        <li><a href="{% url 'home' %}">Mangas</a></li>
+        
+        {% if not user.is_authenticated %} 
+        <li><a href="{% url 'registrar' %}">Registro</a></li>
+        <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+                <li><a href="{% url 'anime_list' %}">Listar Anime</a></li>
+                <li><a href="{% url 'manga_list' %}">Listar Manga</a></li>
+            {% endif %}
+            <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+            <span class="ml-md-5" style="color: blue;"><strong>Usuario: {{ user.get_username }}</strong></span>
+        {% endif %}    
+    </ul>
+
+
+
+{% block animes %}
+
+
+        <h2 class="center-align titulo">
+            
+            <br> Mangas ♥
+        </h2>
+
+        <div class="contenedor">
+            <div class="contenedor_tarjeta">
+                <a href="#">
+                    <figure>
+                        <img src="{% static 'images/catalogo_manga/berserk.jpg' %}" class="frontal" alt="berserk">
+                        <figcaption class="trasera">
+                            <h2 class="titulo">Berserk</h2>
+                            <hr>
+                            <p>Guts es un espadachín solitario que porta en su espalda dos cosas: una absurdamente enorme y burda espada, y una cruel y dura historia. En un mundo en el que la guerra, las montañas de cadáveres y la desdicha son la moneda
+                                común, el mal que acecha es cada vez más poderoso. Solo Guts se interpone en su camino con dureza y sangre fría, aunque de la triste historia de su vida ahora no queda más que una marca y una gran sed de venganza.</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+
+            <div class="contenedor_tarjeta">
+                <a href="#">
+                    <figure>
+                        <img src="{% static 'images/catalogo_manga/one_punch_man.jpg' %}" class="frontal" alt="one_punch_man">
+                        <figcaption class="trasera">
+                            <h2 class="titulo"> One Punch Man</h2>
+                            <hr>
+                            <p>¡Sigue la vida de un héroe promedio que gana todas sus peleas con un solo puño! Esto le causa un montón de frustración, ahora ya no siente la adrenalina y la emoción de una dura pelea. Tal vez ese riguroso entrenamiento para
+                                volverse fuerte no valió la pena. Después de todo, ¿qué tiene de bueno tener un poder tan aplastante?</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+
+            <div class="contenedor_tarjeta">
+                <a href="#">
+                    <figure>
+                        <img src="{% static 'images/catalogo_manga/shingeki_no_kyojin.jpg' %}" class="frontal" alt="shingeki_no_kyojin">
+                        <figcaption class="trasera">
+                            <h2 class="titulo"> Shingeki no Kyojin</h2>
+                            <hr>
+                            <p>Muchos años atrás, la humanidad estuvo al borde de la extinción con la aparición de unas criaturas gigantes que devoraban a todas las personas. Huyendo, la humanidad consiguió sobrevivir en una ciudad fortificada de altas murallas
+                                que se ha convertido en el último reducto de la civilización contra los Titanes que campan a sus anchas por el mundo. Ahora esa paz está a punto de verse interrumpida por una cadena de acontecimientos que llevará a desvelar
+                                qué son los Titanes y cómo aparecieron.</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+
+            <div class="contenedor_tarjeta">
+                <a href="#">
+                    <figure>
+                        <img src="{% static 'images/catalogo_manga/Dr_Stone.jpg' %}" class="frontal" alt="Dr_Stone">
+                        <figcaption class="trasera">
+                            <h2 class="titulo">Dr. Stone</h2>
+                            <hr>
+                            <p>Senku es un joven extremadamente inteligente con un gran don para la ciencia y una ácida personalidad, y su mejor amigo es Taiju, que es muy buena persona pero más apto para usar los músculos que para pensar. Cuando tras cierto
+                                incidente toda la humanidad acaba convertida en piedra, ellos logran despertarse en un mundo miles de años después, con la civilización humana completamente desaparecida y con toda la humanidad congelada en piedra como
+                                ellos estuvieron.</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+
+            <div class="contenedor_tarjeta">
+                <a href="#">
+                    <figure>
+                        <img src="{% static 'images/catalogo_manga/one_piece.jpg' %}" class="frontal" alt="one_piece">
+                        <figcaption class="trasera">
+                            <h2 class="titulo">One Piece</h2>
+                            <hr>
+                            <p>Hace veintidós años, el legendario pirata, Gold Roger fue ejecutado. Sus últimas palabras fueron que su tesoro conocido como "One Piece" estaba escondido en algún lugar de la Grand Line. Esto dio inicio a la Era de los Piratas.
+                                Ahora, veinte dos años después, Monkey D. Luffy de diecisiete años desea encontrar el One Piece y convertirse en el Rey de los Piratas.
+                            </p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+
+            <div class="contenedor_tarjeta">
+                <a href="#">
+                    <figure>
+                        <img src="{% static 'images/catalogo_manga/slam_dunk.jpg' %}" class="frontal" alt="slam_dunk">
+                        <figcaption class="trasera">
+                            <h2 class="titulo">Slam Dunk</h2>
+                            <hr>
+                            <p>Un estudiante de preparatoria llamado Hanamichi Sakuragi, que sufre una serie de rechazos amorosos hasta que un buen día conoce a una chica a quien le fascina el baloncesto. A causa de esto Hanamichi fingirá ser un deportista
+                                y se inscribirá en el club de baloncesto del colegio con la esperanza de poder impresionarla y salir con ella. Aunque con el tiempo descubrirá en el baloncesto un deporte que lo exigirá y pondrá a prueba sacando lo mejor
+                                de él.
+                            </p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+
+            <div class="contenedor_tarjeta">
+                <a href="#">
+                    <figure>
+                        <img src="{% static 'images/catalogo_manga/demon_slayer.jpg' %}" class="frontal" alt="demon_slayer">
+                        <figcaption class="trasera">
+                            <h2 class="titulo">Demon Slayer: Kimetsu no Yaiba</h2>
+                            <hr>
+                            <p>Estamos en la era Taisho de Japón. Tanjiro, un joven que se gana la vida vendiendo carbón, descubre un día que su familia ha sido asesinada por un demonio. Para empeorar las cosas, su hermana menor Nezuko, la única superviviente
+                                de la masacre, ha sufrido una transformación en demonio. Destrozado por los acontecimientos Tanjiro decide convertirse en un cazador de demonios.</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+
+            <div class="contenedor_tarjeta">
+                <a href="#">
+                    <figure>
+                        <img src="{% static 'images/catalogo_manga/Overlord.jpg' %}" class="frontal" alt="Overlord">
+                        <figcaption class="trasera">
+                            <h2 class="titulo">Overlord</h2>
+                            <hr>
+                            <p>La historia da comienzo cuando Yggdrasil, un popular juego online, es cerrado un día sin previo aviso. Sin embargo, el protagonista, Momonga, decide no salir del juego. Momonga así se transforma y se convierte en “el mago más
+                                poderoso”. El mundo sigue cambiando con él dentro, y los NPCs comienzan a sentir emociones. Sin familia, amigos ni lugar en la sociedad, Momonga tendrá que luchar por adaptarse al nuevo mundo en el que se ha convertido
+                                el juego.</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+
+            <div class="contenedor_tarjeta">
+                <a href="#">
+                    <figure>
+                        <img src="{% static 'images/catalogo_manga/Yakusoku_no_Neverland.jpg' %}" class="frontal" alt="Yakusoku_no_Neverland">
+                        <figcaption class="trasera">
+                            <h2 class="titulo">Yakusoku no Neverland</h2>
+                            <hr>
+                            <p>En el orfanato Grace Field, los niños reciben comida exquisita, una educación excelente y el amor de su cuidadora, a la que llaman «mamá». Cuando alguien es adoptado, se marcha y lleva consigo un juguete. El día en que Conny
+                                olvidó su juguete, Emma y Norman fueron a entregárselo, y lo que descubrieron alteró la plácida vida que llevaban hasta ese entonces.
+                            </p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+        </div>
+
+{% endblock animes %}
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+    <footer>
+        <div class="container-footer-all">
+            <div class="container-body">
+                <div class="columna1">
+                    <h1>¿Quiénes Somos?</h1>
+                    <p>Recomienda Series está creada para ayudar a los fans del mundo del anime y manga a encontrar su serie y/o lectura favorita, este catalogo realizado para que nuestros visitantes puedan disfrutar de la mejor experiencia posible.
+                    </p>
+                </div>
+                <div class="columna2">
+                    <h1>Anime y Manga Legal</h1>
+                    <div class="fila">
+                        <img src="{% static 'images/iconos/crunchyroll.png' %}"   alt="crunchyroll">
+                        <label>Crunchyroll</label>
+                    </div>
+                    <div class="fila">
+                        <img src=" {% static 'images/iconos/netflix.png' %} " alt="netflix">
+                        <label>Netflix</label>
+                    </div>
+                    <div class="fila">
+                        <img src=" {% static 'images/iconos/clarovideo.png'  %}" alt="clarovideo">
+                        <label>Claro Video</label>
+                    </div>
+                </div>
+                <div class="columna3">
+                    <h1>Informacion Contactos</h1>
+                    <div class="fila2">
+                        <img src=" {% static 'images/iconos/smartphone.png' %}" alt="Smartphone">
+                        <label>+569-1469-8548</label>
+                    </div>
+                    <div class="fila2">
+                        <img src=" {% static 'images/iconos/contact.png' %}" alt="Correo">
+                        <label>Recomienda_series@nihon.cl </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-footer">
+            <div class="footer">
+                <div class="copyright">
+                    © 2020 Todos los derechos reservados |
+                    <a href="">Recomienda Series</a>
+                </div>
+                <div class="information">
+                    <a href="">Informacion Compañia</a> |
+                    <a href="">Politica de Privacidad</a> |
+                    <a href="">Terminos y Condiciones</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <div class="social-bar">
+        <a href="#" class="icon icon-facebook" target="_blank"></a>
+        <a href="#" class="icon icon-twitter" target="_blank"></a>
+        <a href="#" class="icon icon-youtube" target="_blank"></a>
+        <a href="#" class="icon icon-instagram" target="_blank"></a>
+    </div>
+
+
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="{% static '/js/funcion.js' %}"></script>
+    <script src="{% static '/js/main.js' %}"></script>
+    <script src="{% static '/js/validador.js' %}"></script>
+

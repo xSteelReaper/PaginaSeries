@@ -1,0 +1,325 @@
+
+
+{% load static %}
+
+{% load pwa %}
+{% progressive_web_app_meta %}
+
+{% block head %}
+
+
+
+        
+        
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Dancing+Script%7CRaleway:500,600&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/0dac381c07.js"></script>
+
+        <!-- Materialize -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="{% static '/css/index.css' %}">
+        <link rel="stylesheet" href="{% static '/css/estilos.css' %}">
+        <link rel="stylesheet" href="{% static '/css/font.css' %}">
+        <link rel="stylesheet" href="{% static '/css/footer.css' %}">
+        <link rel="stylesheet" href="{% static '/css/redes_sociales.css' %}">
+        <link rel="stylesheet" href="{% static '/css/catalogo_anime.css' %}">
+        <link rel="stylesheet" href="{% static '/css/catalogo_manga.css' %}">
+        {% comment %} <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}"> {% endcomment %}
+
+        <!--JavaScript-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+{% endblock  %}
+
+<nav class="nav-wrapper sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}"><img src=" {% static 'images/Logo/Fairy_tale_symbol.svg' %}" class="logo" alt="logo"></a>
+            <a href="#" data-target="menu-responsive" class="sidenav-trigger">
+                <i class="material-icons">menu</i>
+            </a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="{% url 'home' %}">Inicio</a></li>
+                <li><a href="{% url 'animecatalogo' %}">Anime</a></li>
+                <li><a href="{% url 'mangacatalogo' %}">Manga</a></li>
+                
+                {% if not user.is_authenticated %}  
+                <a class="btn btn-primary" href="{% url 'registrar' %} " role="button">Registro</a>
+                <a class="btn btn-primary" href="{% url 'login' %}" role="button">Login</a>
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                {% if user.is_superuser %}
+                <li class="nav-item"><a style="color: white;" href="{% url 'anime_list' %}">Listar Anime</a></li>
+                <li class="nav-item"><a style="color: white;" href="{% url 'manga_list' %}">Listar Manga</a></li>
+                {% endif %}
+               
+                <li class="nav-item"><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+                <span class="ml-md-5" style="color: blue;"><strong>Usuario: {{ user.get_username }}</strong></span>
+                {% endif %}  
+                
+            </ul>
+        </div>
+    </nav>
+
+    <!--Haciendo el nav responsive-->
+    <ul class="sidenav" id="menu-responsive">
+        <li><a href="{% url 'home' %}">Inicio</a></li>
+        <li><a href="{% url 'home' %}">Animes</a></li>
+        <li><a href="{% url 'home' %}">Mangas</a></li>
+        
+        {% if not user.is_authenticated %} 
+        <li><a href="{% url 'registrar' %}">Registro</a></li>
+        <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+                <li><a href="{% url 'anime_list' %}">Listar Anime</a></li>
+                <li><a href="{% url 'manga_list' %}">Listar Manga</a></li>
+            {% endif %}
+            <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+            <span class="ml-md-5" style="color: blue;"><strong>Usuario: {{ user.get_username }}</strong></span>
+        {% endif %}    
+    </ul>
+
+
+
+{% block animes %}
+
+
+        <h2 class="center-align titulo">
+            
+            <br> Animes ♥
+        </h2>
+
+        <div class="contenedor">
+            <div class="contenedor_tarjeta">
+                <a href="#">
+                    <figure>
+                        <img src="{% static 'images/catalogo_anime/black_clover.jpg' %}" class="frontal" alt="black_clover">
+                        <figcaption class="trasera">
+                            <h2 class="titulo"> Black Clover</h2>
+                            <hr>
+                            <p>En un mundo en el que la magia lo es todo, Asta y Yuno son dos niños que encuentran abandonados el mismo día en una iglesia. Mientras que Yuno crece demostrando tener unos grandes poderes mágicos, Asta parece ser la única persona
+                                en el mundo que no posee capacidad mágica alguna. Eso no importará a los dos jóvenes, que aspirarán a alcanzar el puesto de Rey Mago, el mejor mago de todos.</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+            
+            <div class="contenedor_tarjeta">
+                <a href="#">
+                    <figure>
+                        <img src="{% static 'images/catalogo_anime/Kanojo_Okarishimasu.jpg' %}"  class="frontal" alt="Kanojo_Okarishimasu">
+                        <figcaption class="trasera">
+                            <h2 class="titulo"> Kanojo Okarishimasu</h2>
+                            <hr>
+                            <p>Kazuya Kinoshita es un joven universitario de 20 años que tras conseguir novia, pudo besarla, ¡pero lo dejó tras solo un mes!. Desesperado, recurre a un método muy particular para tener por fin una cita: solicitar una novia
+                                de alquiler. Cuando llega al punto de encuentro le espera una chica: "Eres Kazuya, ¿verdad?". Es una chica preciosa de pelo negro y largo que le sonríe con ternura. Una comedia romántica repleta de amor y emoción da comienzo.</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+
+            <div class="contenedor_tarjeta">
+                <a href="#">
+                    <figure>
+                        <img src="{% static 'images/catalogo_anime/Tate_no_Yuusha.jpg' %}"  class="frontal" alt="Tate_no_Yuusha">
+                        <figcaption class="trasera">
+                            <h2 class="titulo"> Tate no Yuusha</h2>
+                            <hr>
+                            <p>Iwatani Naofumi es el típico otaku, al menos hasta que un día encuentra en la biblioteca un libro que lo transporta a otro mundo. Allí se convertirá en el Héroe del Escudo, uno de los Cuatro Héroes Legendarios, y tendrá que
+                                luchar contra las Olas de la Catástrofe junto a los héroes. Emocionado ante la perspectiva de vivir una gran aventura, Naofumi parte de viaje con su grupo. No obstante, al cabo de unos pocos días lo traicionan y pierde
+                                su dinero, su dignidad y el respeto de los que le rodean.</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+
+            <div class="contenedor_tarjeta">
+                <a href="#">
+                    <figure>
+                        <img src="{% static 'images/catalogo_anime/Fullmetal_Alchemist_Brotherhood.jpg' %}" class="frontal" alt="Fullmetal_Alchemist_Brotherhood">
+                        <figcaption class="trasera">
+                            <h2 class="titulo">Fullmetal Alchemist: Brotherhood</h2>
+                            <hr>
+                            <p>Los hermanos Elric rompieron uno de los más importantes tabúes de la alquimia, de modo que Ed perdió casi la mitad de su cuerpo, ahora reemplazado por partes mecánicas, y su hermano menor Al, quedó convertido en un alma ligada
+                                a una armadura. Ambos buscarán la forma de recuperar sus cuerpos, resolver uno de los grandes misterios de la alquimia y recuperar a su madre.
+                            </p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+
+            <div class="contenedor_tarjeta">
+                <a href="#">
+                    <figure>
+                        <img src="{% static 'images/catalogo_anime/boku_no_hero.jpg' %}" class="frontal" alt="boku_no_hero">
+                        <figcaption class="trasera">
+                            <h2 class="titulo">Boku no Hero Academia</h2>
+                            <hr>
+                            <p>Izuku Midoriya es sólo un estudiante de secundaria regular en un mundo donde las personas con superpoderes conocidos como “rarezas” son comunes. Sin embargo, sueña con convertirse algún día en un héroe, a pesar de ser acosado
+                                por sus compañeros de clase por no tener un peculiaridad. Después de haber sido el único para tratar de salvar a su amigo de la infancia, Katsuki, de un villano, All Might, el héroe más grande del mundo, derrama sobre él
+                                su propia peculiaridad, “One For All”.</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+
+            <div class="contenedor_tarjeta">
+                <a href="#">
+                    <figure>
+                        <img src="{% static 'images/catalogo_anime/HunterxHunter.jpg' %}" class="frontal" alt="HunterxHunter">
+                        <figcaption class="trasera">
+                            <h2 class="titulo">Hunter x Hunter (2011)</h2>
+                            <hr>
+                            <p>Gon Frecks,un niño de 12 años,vive con su tia Mito y su abuela en Isla Ballena, huérfano de madre y según su tía también de padre. Un día Gon es atacado por un oso del bosque, pero es salvado por un cazador quien le explica
+                                que está en busca de su maestro para así convertirse en un cazador, el es quien le dice que su padre Gin esta vivo. Enterado de esto Gon decide convertirse en cazador para poder encontrar a su padre.</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+
+            <div class="contenedor_tarjeta">
+                <a href="#">
+                    <figure>
+                        <img src="{% static 'images/catalogo_anime/Darling_in_the_FranXX.jpg' %}" class="frontal" alt="Darling_in_the_FranXX">
+                        <figcaption class="trasera">
+                            <h2 class="titulo">Darling in the FranXX</h2>
+                            <hr>
+                            <p>En un futuro distante la humanidad ha creado Plantation, una ciudad fortaleza móvil construida sobre las ruinas del mundo y en la que ha florecido la civilización. En la ciudad hay barracones especiales para pilotos llamados
+                                Mistilteinn, aunque popularmente se los conoce como "jaulas de pájaros". Allí es donde viven estos chicos... sin saber nada del mundo exterior, sin poder sentir nunca el enorme cielo. Su única misión en la vida siempre
+                                fue luchar.</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+
+            <div class="contenedor_tarjeta">
+                <a href="#">
+                    <figure>
+                        <img src="{% static 'images/catalogo_anime/Death_note.jpg' %}" class="frontal" alt="Death_note">
+                        <figcaption class="trasera">
+                            <h2 class="titulo">Death note</h2>
+                            <hr>
+                            <p>La historia empieza cuando Light Yagami, el mejor estudiante de preparatoria en todo Japón, encuentra una libreta abandonada en una caminata por su escuela, esta libreta recibe el nombre de «Death Note», la cual es capaz de
+                                matar a cualquier persona cuyo nombre sea escrito en ella. </p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+
+            <div class="contenedor_tarjeta">
+                <a href="#">
+                    <figure>
+                        <img src="{% static 'images/catalogo_anime/Goblin_Slayer.jpg' %}" class="frontal" alt="Goblin_Slayer">
+                        <figcaption class="trasera">
+                            <h2 class="titulo">Goblin Slayer</h2>
+                            <hr>
+                            <p>Una joven sacerdotisa ha formado su primer grupo de aventureros, pero no tardan mucho en verse en serios problemas. Por suerte, quien aparece en su rescate es el Asesino de Goblins, un hombre que ha dedicado su vida a exterminar
+                                a todo goblin viviente por los medios que fueran necesarios. Cuando comienzan a circular rumores sobre sus hazañas, no hay forma de saber quién será el próximo en aparecer</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+
+
+        </div>
+
+        
+
+{% endblock animes %}
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+    <footer>
+        <div class="container-footer-all">
+            <div class="container-body">
+                <div class="columna1">
+                    <h1>¿Quiénes Somos?</h1>
+                    <p>Recomienda Series está creada para ayudar a los fans del mundo del anime y manga a encontrar su serie y/o lectura favorita, este catalogo realizado para que nuestros visitantes puedan disfrutar de la mejor experiencia posible.
+                    </p>
+                </div>
+                <div class="columna2">
+                    <h1>Anime y Manga Legal</h1>
+                    <div class="fila">
+                        <img src="{% static 'images/iconos/crunchyroll.png' %}"   alt="crunchyroll">
+                        <label>Crunchyroll</label>
+                    </div>
+                    <div class="fila">
+                        <img src=" {% static 'images/iconos/netflix.png' %} " alt="netflix">
+                        <label>Netflix</label>
+                    </div>
+                    <div class="fila">
+                        <img src=" {% static 'images/iconos/clarovideo.png'  %}" alt="clarovideo">
+                        <label>Claro Video</label>
+                    </div>
+                </div>
+                <div class="columna3">
+                    <h1>Informacion Contactos</h1>
+                    <div class="fila2">
+                        <img src=" {% static 'images/iconos/smartphone.png' %}" alt="Smartphone">
+                        <label>+569-1469-8548</label>
+                    </div>
+                    <div class="fila2">
+                        <img src=" {% static 'images/iconos/contact.png' %}" alt="Correo">
+                        <label>Recomienda_series@nihon.cl </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-footer">
+            <div class="footer">
+                <div class="copyright">
+                    © 2020 Todos los derechos reservados |
+                    <a href="">Recomienda Series</a>
+                </div>
+                <div class="information">
+                    <a href="">Informacion Compañia</a> |
+                    <a href="">Politica de Privacidad</a> |
+                    <a href="">Terminos y Condiciones</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <div class="social-bar">
+        <a href="#" class="icon icon-facebook" target="_blank"></a>
+        <a href="#" class="icon icon-twitter" target="_blank"></a>
+        <a href="#" class="icon icon-youtube" target="_blank"></a>
+        <a href="#" class="icon icon-instagram" target="_blank"></a>
+    </div>
+
+
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="{% static '/js/funcion.js' %}"></script>
+    <script src="{% static '/js/main.js' %}"></script>
+    <script src="{% static '/js/validador.js' %}"></script>
+

@@ -1,4 +1,4 @@
-#!c:\users\xsteelreaper\desktop\desarrollo web 02d\myvenv\scripts\python.exe
+#!c:\users\xsteelreaper\desktop\nota 2\myvenv\scripts\python.exe
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 

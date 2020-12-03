@@ -34,7 +34,7 @@
 }
 
 body {
-    background: url(/Logo/fondo.jpg) no-repeat fixed center center #333;
+    background: url(../images/Logo/fondo.jpg) no-repeat fixed center center #333;
     background-size: cover;
     font-family: 'Open Sans', sans-serif;
     background-size: cover;

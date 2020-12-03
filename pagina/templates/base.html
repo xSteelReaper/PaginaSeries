@@ -2,8 +2,7 @@
 {% load static %}
 <html>
     <head>
-        <title>{% block title %}{% endblock title %}</title>
-        {% block css %} {% endblock css %}
+        <title></title>
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         
@@ -29,18 +28,18 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 
     </head>
+
     <body>
-    {% block navbar %}
     <nav class="nav-wrapper sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="/home.html"><img src=" {% static 'images/Logo/Fairy_tale_symbol.svg' %}" class="logo" alt="logo"></a>
+            <a class="navbar-brand" href="{% url 'home' %}"><img src=" {% static 'images/Logo/Fairy_tale_symbol.svg' %}" class="logo" alt="logo"></a>
             <a href="#" data-target="menu-responsive" class="sidenav-trigger">
                 <i class="material-icons">menu</i>
             </a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="{% url 'home' %}">Inicio</a></li>
-                <li><a href="{% url 'home' '#animes' %} ">Anime</a></li>
-                <li><a href="{% url 'home' '#mangas' %}">Manga</a></li>
+                <li><a href="{% url 'home' %}">Anime</a></li>
+                <li><a href="{% url 'home' %}">Manga</a></li>
                 
                 {% if not user.is_authenticated %}  
                 <a class="btn btn-primary" href="{% url 'registrar' %} " role="button">Registro</a>
@@ -52,7 +51,7 @@
                 <li class="nav-item"><a style="color: white;" href="{% url 'anime_list' %}">Listar Anime</a></li>
                 <li class="nav-item"><a style="color: white;" href="{% url 'manga_list' %}">Listar Manga</a></li>
                 {% endif %}
-               
+                
                 <li class="nav-item"><a href="{% url 'logout' %}">Cerrar sesión</a></li>
                 <span class="ml-md-5" style="color: blue;"><strong>Usuario: {{ user.get_username }}</strong></span>
                 {% endif %}  
@@ -64,8 +63,8 @@
     <!--Haciendo el nav responsive-->
     <ul class="sidenav" id="menu-responsive">
         <li><a href="{% url 'home' %}">Inicio</a></li>
-        <li><a href="{% url 'home' '#animes' %}">Animes</a></li>
-        <li><a href="{% url 'home' '#mangas' %}">Mangas</a></li>
+        <li><a href="{% url 'home' %}">Animes</a></li>
+        <li><a href="{% url 'home' %}">Mangas</a></li>
         
         {% if not user.is_authenticated %} 
         <li><a href="{% url 'registrar' %}">Registro</a></li>
@@ -82,16 +81,16 @@
         {% endif %}    
     </ul>
     
-    {% endblock %}
     
     
-    <div>
-        {% block footer %} 
-            <footer>
+    
+    
+        
+    <footer>
         <div class="container-footer-all">
             <div class="container-body">
                 <div class="columna1">
-                    <h1>¿Quiénes Somos?</h1>
+                    <h1>¿Quienes somos?</h1>
                     <p>Recomienda Series está creada para ayudar a los fans del mundo del anime y manga a encontrar su serie y/o lectura favorita, este catalogo realizado para que nuestros visitantes puedan disfrutar de la mejor experiencia posible.
                     </p>
                 </div>
@@ -138,14 +137,26 @@
             </div>
         </div>
     </footer>
-        {% endblock %}
-    </div>
     
-    {% block javascript %} 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <script src="/js/funcion.js"></script>
-        <script src="/js/main.js"></script>
-        <script src="/js/validador.js"></script>
-    {% endblock javascript %}
+    
+    
+
+    
+        <div class="social-bar">
+            <a href="#" class="icon icon-facebook" target="_blank"></a>
+            <a href="#" class="icon icon-twitter" target="_blank"></a>
+            <a href="#" class="icon icon-youtube" target="_blank"></a>
+            <a href="#" class="icon icon-instagram" target="_blank"></a>
+        </div>
+    
+
+
+    
+       <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="{% static '/js/funcion.js' %}"></script>
+    <script src="{% static '/js/main.js' %}"></script>
+    <script src="{% static '/js/validador.js' %}"></script>
+    
     </body>
 </html>

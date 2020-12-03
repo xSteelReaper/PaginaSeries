@@ -1,11 +1,97 @@
-{% extends 'base.html' %}
+{% comment %} {% extends 'base.html' %} {% endcomment %}
 {% load static %}
 
+{% load pwa %}
+{% progressive_web_app_meta %}
+
+
+{% block head %}
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Dancing+Script%7CRaleway:500,600&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/0dac381c07.js"></script>
+
+        <!-- Materialize -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="{% static '/css/index.css' %}">
+        <link rel="stylesheet" href="{% static '/css/estilos2.css' %}">
+        <link rel="stylesheet" href="{% static '/css/font.css' %}">
+        <link rel="stylesheet" href="{% static '/css/footer.css' %}">
+        <link rel="stylesheet" href="{% static '/css/redes_sociales.css' %}">
+        <link rel="stylesheet" href="{% static '/css/catalogo_anime.css' %}">
+        <link rel="stylesheet" href="{% static '/css/catalogo_manga.css' %}">
+        {% comment %} <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}"> {% endcomment %}
+
+        <!--JavaScript-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+{% endblock  %}
+
+<nav class="nav-wrapper sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}"><img src=" {% static 'images/Logo/Fairy_tale_symbol.svg' %}" class="logo" alt="logo"></a>
+            <a href="#" data-target="menu-responsive" class="sidenav-trigger">
+                <i class="material-icons">menu</i>
+            </a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="{% url 'home' %}">Inicio</a></li>
+                <li><a href="{% url 'animecatalogo' %}">Anime</a></li>
+                <li><a href="{% url 'mangacatalogo' %}">Manga</a></li>
+                
+                {% if not user.is_authenticated %}  
+                <a class="btn btn-primary" href="{% url 'registrar' %} " role="button">Registro</a>
+                <a class="btn btn-primary" href="{% url 'login' %}" role="button">Login</a>
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                {% if user.is_superuser %}
+                <li class="nav-item"><a style="color: white;" href="{% url 'anime_list' %}">Listar Anime</a></li>
+                <li class="nav-item"><a style="color: white;" href="{% url 'manga_list' %}">Listar Manga</a></li>
+                {% endif %}
+               
+                <li class="nav-item"><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+                <span class="ml-md-5" style="color: blue;"><strong>Usuario: {{ user.get_username }}</strong></span>
+                {% endif %}  
+                
+            </ul>
+        </div>
+    </nav>
+
+    <!--Haciendo el nav responsive-->
+    <ul class="sidenav" id="menu-responsive">
+        <li><a href="{% url 'home' %}">Inicio</a></li>
+        <li><a href="{% url 'animecatalogo' %}">Animes</a></li>
+        <li><a href="{% url 'mangacatalogo' %}">Mangas</a></li>
+        
+        {% if not user.is_authenticated %} 
+        <li><a href="{% url 'registrar' %}">Registro</a></li>
+        <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+                <li><a href="{% url 'anime_list' %}">Listar Anime</a></li>
+                <li><a href="{% url 'manga_list' %}">Listar Manga</a></li>
+            {% endif %}
+            <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+            <span class="ml-md-5" style="color: blue;"><strong>Usuario: {{ user.get_username }}</strong></span>
+        {% endif %}    
+    </ul>
+
 {% block content %}
+
 <div class="container">
-<h1 class="display-3">Mangas</h1>
+<h2 class="center-align titulo">
+            
+            <br> Mangas ♥
+        </h2>
 <hr>
-<a class="btn" role="button" href="{% url 'anime_form' %}">Agregar</a>
+<a class="btn" role="button" href="{% url 'manga_form' %}">Agregar</a>
 <hr>
 
 {% if not object_list %}
@@ -15,11 +101,11 @@
 <table class="table table-bordered">
     <thead>
          <tr> 
+             <td>Fotografia</td>
              <td>Nombre</td>
              <td>Publicacion</td>
              <td>Estado</td>
              <td>Sinopsis</td>
-             <td>Fotografia</td>
          </tr>
     </thead>
     <tbody>  
@@ -44,3 +130,56 @@
 </div>
 
 {% endblock %}
+
+
+<footer>
+        <div class="container-footer-all">
+            <div class="container-body">
+                <div class="columna1">
+                    <h1>¿Quiénes Somos?</h1>
+                    <p>Recomienda Series está creada para ayudar a los fans del mundo del anime y manga a encontrar su serie y/o lectura favorita, este catalogo realizado para que nuestros visitantes puedan disfrutar de la mejor experiencia posible.
+                    </p>
+                </div>
+                <div class="columna2">
+                    <h1>Anime y Manga Legal</h1>
+                    <div class="fila">
+                        <img src="{% static 'images/iconos/crunchyroll.png' %}"   alt="crunchyroll">
+                        <label>Crunchyroll</label>
+                    </div>
+                    <div class="fila">
+                        <img src=" {% static 'images/iconos/netflix.png' %} " alt="netflix">
+                        <label>Netflix</label>
+                    </div>
+                    <div class="fila">
+                        <img src=" {% static 'images/iconos/clarovideo.png'  %}" alt="clarovideo">
+                        <label>Claro Video</label>
+                    </div>
+                </div>
+                <div class="columna3">
+                    <h1>Informacion Contactos</h1>
+                    <div class="fila2">
+                        <img src=" {% static 'images/iconos/smartphone.png' %}" alt="Smartphone">
+                        <label>+569-1469-8548</label>
+                    </div>
+                    <div class="fila2">
+                        <img src=" {% static 'images/iconos/contact.png' %}" alt="Correo">
+                        <label>Recomienda_series@nihon.cl </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-footer">
+            <div class="footer">
+                <div class="copyright">
+                    © 2020 Todos los derechos reservados |
+                    <a href="">Recomienda Series</a>
+                </div>
+                <div class="information">
+                    <a href="">Informacion Compañia</a> |
+                    <a href="">Politica de Privacidad</a> |
+                    <a href="">Terminos y Condiciones</a>
+                </div>
+            </div>
+        </div>
+    </footer>

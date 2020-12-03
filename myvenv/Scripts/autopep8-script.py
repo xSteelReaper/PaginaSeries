@@ -1,4 +1,4 @@
-#!"c:\users\xsteelreaper\desktop\desarrollo web 02d\myvenv\scripts\python.exe"
+#!"c:\users\xsteelreaper\desktop\nota 2\myvenv\scripts\python.exe"
 # EASY-INSTALL-ENTRY-SCRIPT: 'autopep8==1.5.4','console_scripts','autopep8'
 import re
 import sys

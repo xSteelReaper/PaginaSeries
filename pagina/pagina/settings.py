@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'v8gm$@r(kqf)f7taf1=gbn%w=curkfyz2p4#)5e@i(18tycy=0'
+SECRET_KEY = '&fv6_qdg_pigsod6=#@_@p%o#n&-1%%=azt0-%aky=kh)bvam0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.Registro',
     'apps.Usuario',
+    'rest_framework',
+    'social_django',  # <--- this
+    'social.apps.django_app.default',
+    'pwa',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware', # <--- this
 ]
 
 ROOT_URLCONF = 'pagina.urls'
@@ -57,7 +62,7 @@ ROOT_URLCONF = 'pagina.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -65,12 +70,31 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
+
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'pagina.wsgi.application'
+
+AUTHENTICATION_BACKENDS = [
+                'social.backends.facebook.FacebookAppOAuth2',
+                'social.backends.facebook.FacebookOAuth2',
+                'django.contrib.auth.backends.ModelBackend',
+                'social_core.backends.facebook.FacebookOAuth2',
+               
+]
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '668646217151211'
+SOCIAL_AUTH_FACEBOOK_SECRET = '6f1a1d5b52b3c598ce4b8d0855e73ad6'
+
+
+
 
 
 # Database
@@ -126,7 +150,30 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'static', 'images')
 STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'static', 'static-only')
 
+
+
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
 
+# PWA
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'static/js', 'serviceworker.js')
+
+PWA_APP_NAME = 'Proyecto Registro Anime y Manga'
+PWA_APP_DESCRIPTION = 'Registro Academico Web App DUOC'
+PWA_APP_THEME_COLOR = '#87EFC3'
+PWA_APP_BACKGROUND_COLOR = '#fff'
+PWA_APP_ICONS = [
+    {
+        'src': '/static/images/icons/logo.png',
+        'sizes': '128x128'
+    },
+    {
+        'src': '/static/images/icons/logo2.png',
+        'sizes': '256x256'
+    },
+    {
+        'src': '/static/images/icons/logo3.png',
+        'sizes': '512x512'
+    }
+]

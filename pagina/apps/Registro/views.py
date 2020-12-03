@@ -6,6 +6,12 @@ from django.urls import reverse_lazy
 from .models import Anime, Manga
 from .forms import AnimeForm, MangaForm
 
+# las importaciones para la API 
+from rest_framework import generics
+from .serializers import AnimeSerializer
+from .serializers import MangaSerializer
+
+
 #Crud anime
 class AnimeList (ListView):                    
     model = Anime
@@ -49,3 +55,23 @@ class MangaDelete(DeleteView):
     model = Manga
     template_name = 'Registro/manga_borrar.html'
     success_url = reverse_lazy('manga_list')
+    
+    
+# clases para la Api 
+# Anime
+class API_objects_Anime(generics.ListCreateAPIView):
+    queryset = Anime.objects.all()
+    serializer_class = AnimeSerializer
+    
+class API_objects_details_Anime(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Anime.objects.all()
+    serializer_class = AnimeSerializer
+
+# # Manga
+class API_objects_Manga(generics.ListCreateAPIView):
+    queryset = Manga.objects.all()
+    serializer_class = MangaSerializer
+    
+class API_objects_details_Manga(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Manga.objects.all()
+    serializer_class = MangaSerializer

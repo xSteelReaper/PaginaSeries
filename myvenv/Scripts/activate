@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\xSteelReaper\Desktop\Desarrollo web 02D\myvenv"
+VIRTUAL_ENV="C:\Users\xSteelReaper\Desktop\nota 2\myvenv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
